@@ -194,20 +194,22 @@ fun DashboardScreen(
                     }
                 }
             } else if (state.loadError != null && state.apps.isEmpty()) {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = state.loadError,
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Button(onClick = { viewModel.refresh() }) {
-                        Text("Muat Ulang")
-                    }
-                }
+    val errorMessage = state.loadError ?: "Terjadi kesalahan"
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = errorMessage,
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+        Button(onClick = { viewModel.refresh() }) {
+            Text("Muat Ulang")
+        }
+    }
             } else {
                 val visible = viewModel.filteredApps(state)
                 if (visible.isEmpty()) {
