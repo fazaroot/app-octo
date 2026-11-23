@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+        CloneX adalah manajer instance berbasis Work Profile resmi Android.
+        CloneX TIDAK mengubah APK, TIDAK mengubah package name, dan TIDAK
+        mengubah tanda tangan digital aplikasi lain.
+
+        Izin yang dipakai:
+        - QUERY_ALL_PACKAGES: menampilkan daftar aplikasi ter-install di dashboard.
+          Di Play Store izin ini sensitif dan harus dijelaskan penggunaannya.
+          Jika pengguna menolak alur ini, dashboard tetap memakai daftar
+          aplikasi launcher lewat LauncherApps.
+        - REQUEST_INSTALL_PACKAGES: TIDAK dipakai untuk menginstall clone.
+          Dinyatakan di sini hanya jika diperlukan di masa depan dan saat ini
+          tidak diminta saat runtime. Dihapus dari permintaan runtime.
+    -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
+    <uses-feature
+        android:name="android.software.managed_users"
+        android:required="false" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".CloneXApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CloneX">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.CloneX">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            Penerima Device Admin untuk peran Profile Owner.
+            Hanya aktif setelah pengguna menyetujui provisioning resmi.
+            CloneX tidak pernah mengaktifkan peran ini secara diam-diam.
+        -->
+        <receiver
+            android:name=".provisioning.CloneXDeviceAdminReceiver"
+            android:exported="true"
+            android:label="@string/device_admin_label"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin" />
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+                <action android:name="android.app.action.PROFILE_PROVISIONING_COMPLETE" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

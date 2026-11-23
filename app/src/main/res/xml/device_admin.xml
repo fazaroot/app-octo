@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Kebijakan Device Admin untuk CloneX sebagai Profile Owner.
+    Hanya kebijakan minimal yang dibutuhkan untuk mengelola profil kerja:
+    tidak ada penguncian perangkat, tidak ada penghapusan data paksa,
+    tidak ada pemantauan. Penghapusan profil hanya dilakukan oleh pengguna
+    lewat Pengaturan sistem, dan akan menghapus data di profil kerja.
+-->
+<device-admin xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-policies>
+        <limit-password />
+        <watch-login />
+    </uses-policies>
+</device-admin>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CloneX</string>
+    <string name="device_admin_label">CloneX Pengelola Profil Kerja</string>
+    <string name="device_admin_description">CloneX memakai peran ini hanya untuk membuat dan mengelola profil kerja resmi Android, agar satu aplikasi bisa berjalan sebagai dua instance terpisah: satu di profil utama dan satu di profil kerja.</string>
+</resources>
